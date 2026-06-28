@@ -1,20 +1,8 @@
-# Isorhamnetin-PM-Pyroptosis-MultiOmics
+# Isorhamnetin-Pyroptosis-MultiOmics
 
 A reproducible bioinformatics and computational pathology workflow for investigating the protective mechanism of **isorhamnetin (Isorhy)** in **Pasteurella multocida (P. multocida)-induced lung injury**, with a focus on pyroptosis-related molecular mechanisms and **NLRP2-centered evidence integration**.
 
 The project integrates molecular docking, machine-learning recovery scoring, H&E image-based lung pathology quantification, transcriptomic differential expression analysis, enrichment analysis, GSEA, WGCNA, PPI network reconstruction, and final report generation.
-
-## Suggested repository name
-
-**Isorhamnetin-PM-Pyroptosis-MultiOmics**
-
-Alternative names:
-
-- **Isorhy-PMultocida-LungInjury-Analysis**
-- **Isorhamnetin-Pyroptosis-NLRP2-Pipeline**
-- **PM-LungInjury-MultiOmics-Workflow**
-- **NLRP2-Pyroptosis-Isorhamnetin-Analysis**
-- **Isorhy-Pasteurella-Multimodal-Bioinformatics**
 
 ## Project overview
 
@@ -66,32 +54,20 @@ The workflow is organized around four analytical components:
 
 ## Repository structure
 
-A recommended GitHub structure is:
-
 ```text
-Isorhamnetin-PM-Pyroptosis-MultiOmics/
+Isorhamnetin-Pyroptosis-MultiOmics/
 ├── README.md
 ├── scripts/
-│   ├── run_full_analysis.py
-│   ├── run_second_round_enhancement.py
-│   ├── run_publication_upgrade.py
-│   ├── run_formal_gsea.R
-│   ├── run_wgcna_publication.R
-│   ├── recalc_padj_and_plot_volcano.py
-│   ├── part2_recovery_rf.py
-│   ├── fix_report_assets.py
-│   └── build_full_story_doc.py
-├── input/
-│   └── .gitkeep
-├── output/
-│   └── .gitkeep
-├── report_assets/
-│   └── .gitkeep
-├── source_assets/
-│   └── .gitkeep
-├── requirements.txt
-├── .gitignore
-└── LICENSE
+   ├── run_full_analysis.py
+   ├── run_second_round_enhancement.py
+   ├── run_publication_upgrade.py
+   ├── run_formal_gsea.R
+   ├── run_wgcna_publication.R
+   ├── recalc_padj_and_plot_volcano.py
+   ├── part2_recovery_rf.py
+   ├── fix_report_assets.py
+   └── build_full_story_doc.py
+
 ```
 
 ## Data requirements
@@ -128,76 +104,6 @@ Optional R dependencies:
 ```r
 install.packages(c("WGCNA", "jsonlite"))
 BiocManager::install(c("fgsea", "msigdbr"))
-```
-
-## How to run
-
-### 1. Run the full transcriptomic and network analysis
-
-```bash
-python scripts/run_full_analysis.py --input input --output output
-```
-
-To allow public gene-set downloading and STRING queries:
-
-```bash
-python scripts/run_full_analysis.py --input input --output output --allow-public-network
-```
-
-### 2. Run the second-round enhancement
-
-```bash
-python scripts/run_second_round_enhancement.py --input input --output output
-```
-
-This step attempts to improve GSEA and PPI interpretation using public resources when available.
-
-### 3. Generate publication-style figures
-
-```bash
-python scripts/run_publication_upgrade.py --input input --output output
-```
-
-This step redraws key plots in a more publication-ready style and exports PNG/PDF/SVG figure files.
-
-### 4. Recalculate adjusted p-values and redraw volcano plots
-
-```bash
-python scripts/recalc_padj_and_plot_volcano.py
-```
-
-This script is designed for DEG workbooks that require Benjamini-Hochberg adjusted p-value recalculation and cleaner volcano plot generation.
-
-### 5. Run formal GSEA manually
-
-```bash
-Rscript scripts/run_formal_gsea.R ranked_genes.csv downloaded_gene_sets/ gsea_results.csv gsea_details.json
-```
-
-### 6. Run formal WGCNA manually
-
-```bash
-Rscript scripts/run_wgcna_publication.R wgcna_expression.csv output/figures_pub
-```
-
-### 7. Run animal-level random forest recovery scoring
-
-```bash
-python scripts/part2_recovery_rf.py
-```
-
-This produces recovery probability, feature importance, ROC, and group-level recovery summary tables.
-
-### 8. Build the final Word report
-
-```bash
-python scripts/build_full_story_doc.py
-```
-
-The generated document is saved under:
-
-```text
-output/Isorhy_PM_full_methods_results.docx
 ```
 
 ## Main outputs
@@ -237,7 +143,7 @@ output/
 └── completion_summary.txt
 ```
 
-## Important interpretation notes
+## Notes
 
 This repository contains an analysis workflow rather than a finalized biological claim. Some modules can be formal or exploratory depending on the available data and local software environment.
 
@@ -248,51 +154,3 @@ In particular:
 - Python WGCNA-like outputs should be treated as exploratory evidence.
 - AI-enhanced PPI is an AI-inspired weighted network prioritization method, not a trained graph neural network unless explicitly replaced by a real GNN model.
 - NLRP2 should be described as a candidate regulator unless supported by further experimental validation.
-
-## Suggested `.gitignore`
-
-```gitignore
-# Raw and large data
-input/*
-!input/.gitkeep
-source_assets/*
-!source_assets/.gitkeep
-report_assets/*
-!report_assets/.gitkeep
-
-# Outputs
-output/*
-!output/.gitkeep
-
-# Large intermediate files
-*.rds
-*.RData
-*.Robj
-*.Robj.gz
-*.gz
-*.zip
-*.tar
-*.tar.gz
-*.pkl
-*.h5
-*.h5ad
-
-# Python
-__pycache__/
-*.pyc
-.ipynb_checkpoints/
-
-# System
-.DS_Store
-Thumbs.db
-```
-
-## Recommended citation statement
-
-If this workflow is used in a manuscript or thesis, please cite the repository and describe it as:
-
-> A multimodal computational workflow integrating molecular docking, machine-learning recovery scoring, histopathology image analysis, transcriptomic enrichment, co-expression network analysis, and PPI-based candidate regulator prioritization for isorhamnetin-treated P. multocida-induced lung injury.
-
-## License
-
-This project is intended for academic and research use. Add a license file before public release, such as MIT for open-source code or a more restrictive license if the data and workflow are part of an unpublished study.
